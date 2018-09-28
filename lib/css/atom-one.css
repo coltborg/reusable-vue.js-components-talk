@@ -19,7 +19,7 @@ hue-6-2: #e6c07b
 
 */
 
-.hljs {
+.dark .hljs {
   --hljs-base:    #282c34;
   --hljs-mono-1:  #abb2bf;
   --hljs-mono-2:  #818896;
@@ -34,7 +34,7 @@ hue-6-2: #e6c07b
   --hljs-hue-6-2: #e6c07b;
 }
 
-.hljs.light {
+.light .hljs {
   --hljs-base:    #fafafa;
   --hljs-mono-1:  #383a42;
   --hljs-mono-2:  #686b77;

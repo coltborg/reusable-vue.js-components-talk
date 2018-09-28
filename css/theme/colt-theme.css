@@ -5,30 +5,69 @@
  */
 @import url(../../lib/font/dank-mono/dank-mono.css);
 @import url(../../lib/font/mathison/mathison.css);
+:root {
+  --white: #ffffff;
+  --white-smoke: #f5f5f5;
+  --seashell: #e6e6e6;
+  --gainsboro: #DDDDDD;
+  --alto: #cacac8;
+  --stack: #888888;
+  --charcoal: #404040;
+  --green-waterloo: #14140a;
+  --palatinate-blue: #3131fc;
+  --quartz: #dcddf4;
+  --fuchsia: #fc25fc;
+  --brilliant-lavender: #f5c5f5;
+  --lazer-lemon: #fdfd26;
+  --electric-lime: #25fc25;
+  --madang: #c5f5c5; }
+
+.dark {
+  --background-color: var(--green-waterloo);
+  --text-color: var(--seashell);
+  --header-color: var(--white-smoke);
+  --link-color: var(--electric-lime);
+  --link-hover-color: var(--madang);
+  --selection-background-color: var(--palatinate-blue); }
+
+.light {
+  --background-color: var(--white-smoke);
+  --text-color: var(--charcoal);
+  --header-color: var(--green-waterloo);
+  --link-color: var(--palatinate-blue);
+  --link-hover-color: var(--quartz);
+  --selection-background-color: var(--palatinate-blue); }
+
 section.has-light-background, section.has-light-background h1, section.has-light-background h2, section.has-light-background h3, section.has-light-background h4, section.has-light-background h5, section.has-light-background h6 {
-  color: #222; }
+  color: var(--green-waterloo); }
+
+.reveal code {
+  font-family: 'dm', monospace !important; }
+
+.reveal pre {
+  box-shadow: none !important; }
 
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
 body {
-  background: #222;
-  background-color: #222; }
+  background: var(--background-color);
+  background-color: var(--background-color); }
 
 .reveal {
   font-family: "dm", sans-serif;
   font-size: 42px;
   font-weight: normal;
-  color: #fff; }
+  color: var(--text-color); }
 
 ::selection {
   color: #fff;
-  background: #bee4fd;
+  background: var(--selection-background-color);
   text-shadow: none; }
 
 ::-moz-selection {
   color: #fff;
-  background: #bee4fd;
+  background: var(--selection-background-color);
   text-shadow: none; }
 
 .reveal .slides section,
@@ -46,11 +85,11 @@ body {
 .reveal h5,
 .reveal h6 {
   margin: 0 0 20px 0;
-  color: #fff;
+  color: var(--header-color);
   font-family: "Mathison", sans-serif;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.2;
-  letter-spacing: normal;
+  letter-spacing: 1.1;
   text-transform: uppercase;
   text-shadow: none;
   word-wrap: break-word; }
@@ -210,20 +249,20 @@ body {
  * LINKS
  *********************************************/
 .reveal a {
-  color: #42affa;
+  color: var(--link-color);
   text-decoration: none;
   -webkit-transition: color .15s ease;
   -moz-transition: color .15s ease;
   transition: color .15s ease; }
 
 .reveal a:hover {
-  color: #8dcffc;
+  color: var(--link-hover-color);
   text-shadow: none;
   border: none; }
 
 .reveal .roll span:after {
   color: #fff;
-  background: #068de9; }
+  background: #3131fc; }
 
 /*********************************************
  * IMAGES
@@ -231,7 +270,7 @@ body {
 .reveal section img {
   margin: 15px 0px;
   background: rgba(255, 255, 255, 0.12);
-  border: 4px solid #fff;
+  border: 4px solid var(--text-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
 
 .reveal section img.plain {
@@ -245,21 +284,21 @@ body {
 
 .reveal a:hover img {
   background: rgba(255, 255, 255, 0.2);
-  border-color: #42affa;
+  border-color: var(--link-color);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }
 
 /*********************************************
  * NAVIGATION CONTROLS
  *********************************************/
 .reveal .controls {
-  color: #42affa; }
+  color: var(--link-color); }
 
 /*********************************************
  * PROGRESS BAR
  *********************************************/
 .reveal .progress {
   background: rgba(0, 0, 0, 0.2);
-  color: #42affa; }
+  color: var(--link-color); }
 
 .reveal .progress span {
   -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
@@ -271,4 +310,4 @@ body {
  *********************************************/
 @media print {
   .backgrounds {
-    background-color: #222; } }
+    background-color: var(--background-color); } }

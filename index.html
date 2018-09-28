@@ -2,19 +2,19 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>reveal.js</title>
+  <title>reveal.js</title>
 
-	<link rel="stylesheet" href="css/reveal.css">
-	<link rel="stylesheet" href="css/theme/colt-theme.css">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/colt-theme.css">
 
-	<!-- Theme used for syntax highlighting of code -->
-	<link rel="stylesheet" href="lib/css/atom-one.css">
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/atom-one.css">
 
-	<!-- Printing and PDF exports -->
-	<script>
+  <!-- Printing and PDF exports -->
+  <script>
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
@@ -23,54 +23,91 @@
 		</script>
 </head>
 
-<body>
-	<div class="reveal">
-		<div class="slides">
-			<section>
-				<h1>Atom One Dark</h1>
-				<pre><code class="hljs" data-trim>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
+<body class="dark">
+  <div class="reveal">
+    <div class="slides">
 
-    var nodes = document.querySelectorAll( selector );
+      <section>
+        <h1>Atom One Dark/Light</h1>
+        <pre>
+          <code data-trim>
+            function linkify( selector ) {
+              if( supports3DTransforms ) {
 
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
+                var nodes = document.querySelectorAll( selector );
 
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
-					</code></pre>
-			</section>
-			<section>
-				<h1>Atom One Light</h1>
-				<pre><code class="hljs light" data-trim>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
+                for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
+                  var node = nodes[i];
 
-    var nodes = document.querySelectorAll( selector );
+                  if( !node.className ) {
+                    node.className += ' roll';
+                  }
+                }
+              }
+            }
+          </code>
+        </pre>
+      </section>
 
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
+      <section>
+        <h1>Diff</h1>
+        <pre>
+          <code class="diff" data-trim>
+            var hello = function() {
+            -  "hello";
+            +  return "hello";
+            }
+          </code>
+        </pre>
+      </section>
 
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
-					</code></pre>
-			</section>
-		</div>
-	</div>
+      <section>
+        <h1>Vue Component</h1>
+        <pre>
+          <code class="" data-trim>
+            <!-- LinksList.vue -->
+            <template>
+              <!-- ... -->
+                <li v-for="link in links">
+                  <slot name="link"
+                    :link="link"
+                  ></slot>
+                </li>
+              <!-- ... -->
+            </template>
 
-	<script src="lib/js/head.min.js"></script>
-	<script src="js/reveal.js"></script>
+            <script>
+            export default {
+              data() {
+                return {
+                  links: [
+                    { href: 'http://...', title: 'First Link', bookmarked: true },
+                    { href: 'http://...', title: 'Second Link', bookmarked: false },
+                    // ...
+                  ]
+                }
+              }
+            }
+            </script>
+          </code>
+        </pre>
+      </section>
 
-	<script>
+      <section>
+        <h1>Title</h1>
+        <p>Lorem ipsum dolor sit, amet consectetur <a href="#">adipisicing</a> elit. Eius distinctio labore libero quo
+          tempore accusantium
+          deserunt ex voluptate ipsum, quasi enim eligendi, recusandae iste expedita quibusdam. Dignissimos dolorum
+          error
+          fuga.</p>
+      </section>
+    </div>
+  </div>
+
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+
+  <script>
 			// More info about config & dependencies:
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
