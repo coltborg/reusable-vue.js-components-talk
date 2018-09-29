@@ -82,14 +82,6 @@ section.has-light-background {
 	}
 }
 
-.reveal code {
-	font-family: 'dm', monospace !important;
-}
-
-.reveal pre {
-	box-shadow: none !important;
-}
-
 // Theme template ------------------------------
-@import "../template/theme";
+@import "../template/colt-theme";
 // ---------------------------------------------
