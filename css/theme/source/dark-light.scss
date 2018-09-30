@@ -82,6 +82,12 @@ section.has-light-background {
 	}
 }
 
+* {
+	transition:
+		color 150ms linear,
+		background-color 150ms linear;
+}
+
 // Theme template ------------------------------
 @import "../template/colt-theme";
 // ---------------------------------------------

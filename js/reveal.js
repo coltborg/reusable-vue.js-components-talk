@@ -316,7 +316,8 @@
 			'End':					'Last slide',
 			'B  ,  .':				'Pause',
 			'F':					'Fullscreen',
-			'ESC, O':				'Slide overview'
+			'ESC, O':				'Slide overview',
+			'D': 'Toggle Dark/Light theme'
 		},
 
 		// Holds custom key code mappings
@@ -4812,6 +4813,8 @@
 				case 70: enterFullscreen(); break;
 				// a
 				case 65: if ( config.autoSlideStoppable ) toggleAutoSlide( autoSlideWasPaused ); break;
+				// d
+				case 68: document.body.classList.toggle('dark'); document.body.classList.toggle('light'); break;
 				default:
 					triggered = false;
 			}
