@@ -1,4 +1,8 @@
 {
   "eslint.enable": false,
-  "javascript.format.enable": false
+  "javascript.format.enable": false,
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#009eff",
+    "statusBar.foreground": "#062f48"
+  }
 }
