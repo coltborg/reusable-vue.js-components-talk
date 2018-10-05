@@ -83,7 +83,7 @@ body {
 .reveal h6 {
   margin: 0 0 20px 0;
   color: var(--header-color);
-  font-family: "Spectral", serif;
+  font-family: "dm", sans-serif;
   font-weight: 800;
   line-height: 1.2;
   letter-spacing: 1.1;
