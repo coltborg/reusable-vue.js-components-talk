@@ -23,7 +23,7 @@
 		</script>
 </head>
 
-<body class="dark">
+<body class="light">
   <div class="reveal">
     <div class="slides">
 
@@ -40,6 +40,44 @@
 
       <section>
         <h1>Slots</h1>
+      </section>
+
+      <section>
+        <blockquote>
+          <p>Vue implements a content distribution API that’s modeled after the current <a href="https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md" target="_blank">Web Components spec draft</a>, using the <slot> element to serve as distribution outlets for content.</p>
+          <footer>
+            — <cite><a href="https://vuejs.org/v2/guide/components-slots.html">Vuejs.org</a></cite>
+          </footer>
+        </blockquote>
+      </section>
+
+      <section>
+        <p>Allows a parent component to pass DOM elements into a child component.</p>
+      </section>
+
+      <section>
+        <pre>
+          <code data-trim>
+            <!-- MyButton.vue -->
+            <template>
+              <button class="...">
+                <slot></slot>
+              </button>
+            </template>
+          </code>
+        </pre>
+        <pre>
+          <code data-trim>
+            <!-- Calling the component in a parent -->
+            <my-button>
+              Slot Text
+            </my-button>
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <iframe src="https://codesandbox.io/embed/vxyj7pp05?module=%2Fsrc%2FPageLayout.vue" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
       </section>
 
       <section>

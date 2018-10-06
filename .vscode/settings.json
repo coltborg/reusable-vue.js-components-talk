@@ -4,5 +4,6 @@
   "workbench.colorCustomizations": {
     "statusBar.background": "#009eff",
     "statusBar.foreground": "#062f48"
-  }
+  },
+  "html.format.wrapLineLength": 0
 }
