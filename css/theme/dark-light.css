@@ -180,6 +180,10 @@ body {
 .reveal q {
   font-style: italic; }
 
+.reveal cite {
+  font-size: 80%;
+  font-style: italic; }
+
 .reveal pre {
   display: block;
   position: relative;

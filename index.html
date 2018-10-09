@@ -52,12 +52,21 @@
       </section>
 
       <section>
-        <p>Allows a parent component to pass DOM elements into a child component.</p>
+        <blockquote>
+          <p>Slots are useful when you want to inject content in a specific place of a component.</p>
+          <footer>
+            — <cite><a href="https://css-tricks.com/using-scoped-slots-in-vue-js-to-abstract-functionality/" target="_blank">Mateusz Rybczonek on CSS Tricks</a></cite>
+          </footer>
+        </blockquote>
       </section>
 
       <section>
         <h1>Button</h1>
         <p><em>Using Slots</em></p>
+      </section>
+
+      <section class="center">
+        <img src="./assets/images/button.png" alt="Example of a button with enter text.">
       </section>
 
       <section>
@@ -88,6 +97,10 @@
       <section>
         <h1>Alert</h1>
         <p><em>Using Default Content</em></p>
+      </section>
+
+      <section class="center">
+        <img src="./assets/images/alert.png" alt="An orange alert warning with a generic title and text explaining something wrong is happening.">
       </section>
 
       <section>
@@ -156,7 +169,7 @@
               <div>
                 <label class="...">
           -       <div>Label</div>
-          +       <slot>Label</slot>
+          +       <slot></slot>
                   <input :value="value" @input="emitInput" type="text" class="...">
                 </label>
           -     <p class="...">A warning message.</p>
