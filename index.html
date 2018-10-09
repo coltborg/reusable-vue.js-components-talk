@@ -56,6 +56,11 @@
       </section>
 
       <section>
+        <h1>Button</h1>
+        <p><em>Using Slots</em></p>
+      </section>
+
+      <section>
         <pre>
           <code data-trim>
             <!-- MyButton.vue -->
@@ -78,6 +83,158 @@
 
       <section>
         <iframe src="https://codesandbox.io/embed/vxyj7pp05?module=%2Fsrc%2FPageLayout.vue" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+      </section>
+
+      <section>
+        <h1>Alert</h1>
+        <p><em>Using Default Content</em></p>
+      </section>
+
+      <section>
+        <pre>
+          <code data-trim>
+            <!-- MyAlert.vue -->
+            <div
+              class="..."
+              role="alert">
+              <slot></slot>
+            </div>
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <pre>
+          <code class="diff" data-trim>
+            <!-- MyAlert.vue -->
+            <div class="..." role="alert">
+            - <slot></slot>
+            + <slot>
+            +   <p class="...">General Warning</p>
+            +   <p>Something not ideal is happening.</p>
+            + </slot>
+            </div>
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <iframe src="https://codesandbox.io/embed/34z836oxx5?module=%2Fsrc%2FPageLayout.vue" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+      </section>
+
+      <section>
+        <h1>Label &amp; Input</h1>
+        <p><em>Using Named Slots</em></p>
+      </section>
+
+      <section class="center">
+        <img src="./assets/images/input-with-label-and-warning.png" alt="An input with a label for a name. An input with a label and a warning message that is empty.">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </section>
+
+      <section>
+        <pre>
+          <code data-trim>
+            <!-- MyInput.vue -->
+            <template>
+              <div>
+                <label class="...">
+                  <div>Label</div>
+                  <input :value="value" @input="emitInput" type="text" class="...">
+                </label>
+                <p class="...">A warning message.</p>
+              </div>
+            </template>
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <pre>
+          <code class="diff" data-trim>
+            <!-- MyInput.vue -->
+            <template>
+              <div>
+                <label class="...">
+          -       <div>Label</div>
+          +       <slot>Label</slot>
+                  <input :value="value" @input="emitInput" type="text" class="...">
+                </label>
+          -     <p class="...">A warning message.</p>
+          +     <slot></slot>
+              </div>
+            </template>
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <pre>
+          <code data-trim>
+            <!-- MyInput.vue -->
+            <template>
+              <div>
+                <label class="...">
+                  <slot>Label</slot> 🤔
+                  <input :value="value" @input="emitInput" type="text" class="...">
+                </label>
+                <slot></slot> 🤔
+              </div>
+            </template>
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <pre>
+          <code class="diff" data-trim>
+            <!-- MyInput.vue -->
+            <template>
+              <div>
+                <label class="...">
+          -       <div>Label</div>
+          +       <slot name="label">Label</slot>
+                  <input :value="value" @input="emitInput" type="text" class="...">
+                </label>
+              </div>
+            </template>
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <pre>
+          <code data-trim>
+            <!-- MyInput.vue -->
+            <template>
+              <div>
+                <label class="...">
+                  <slot name="label">Label</slot>
+                  <input
+                    :value="value"
+                    @input="emitInput"
+                    type="text"
+                    class="...">
+                </label>
+                <slot name="warning"></slot>
+              </div>
+            </template>
+          </code>
+        </pre>
       </section>
 
       <section>
