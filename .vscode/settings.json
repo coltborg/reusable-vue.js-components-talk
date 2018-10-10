@@ -2,8 +2,9 @@
   "eslint.enable": false,
   "javascript.format.enable": false,
   "workbench.colorCustomizations": {
-    "statusBar.background": "#009eff",
-    "statusBar.foreground": "#062f48"
+    "statusBar.background": "#009dff",
+    "statusBar.foreground": "#062f48",
+    "statusBarItem.hoverBackground": "#1977b2",
   },
   "html.format.wrapLineLength": 0,
   "html.format.enable": false
