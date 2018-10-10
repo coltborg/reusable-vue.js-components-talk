@@ -15,19 +15,19 @@
   --charcoal: #404040;
   --green-waterloo: #14140a;
   --palatinate-blue: #3131fc;
-  --quartz: #dcddf4;
+  --hover-blue: #1e1e94;
   --fuchsia: #fc25fc;
   --brilliant-lavender: #f5c5f5;
   --lazer-lemon: #fdfd26;
   --electric-lime: #25fc25;
-  --madang: #c5f5c5; }
+  --hover-lime: #1e941e; }
 
 .dark {
   --background-color: var(--green-waterloo);
   --text-color: var(--seashell);
   --header-color: var(--white-smoke);
   --link-color: var(--electric-lime);
-  --link-hover-color: var(--madang);
+  --link-hover-color: var(--hover-lime);
   --selection-background-color: var(--palatinate-blue); }
 
 .light {
@@ -35,7 +35,7 @@
   --text-color: var(--charcoal);
   --header-color: var(--green-waterloo);
   --link-color: var(--palatinate-blue);
-  --link-hover-color: var(--quartz);
+  --link-hover-color: var(--hover-blue);
   --selection-background-color: var(--palatinate-blue); }
 
 section.has-light-background, section.has-light-background h1, section.has-light-background h2, section.has-light-background h3, section.has-light-background h4, section.has-light-background h5, section.has-light-background h6 {
@@ -260,6 +260,7 @@ body {
 
 .reveal a:hover {
   color: var(--link-hover-color);
+  text-decoration: underline;
   text-shadow: none;
   border: none; }
 
