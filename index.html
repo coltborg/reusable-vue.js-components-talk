@@ -79,6 +79,136 @@
       </section>
 
       <section>
+        <h1>Render Function</h1>
+      </section>
+
+      <section>
+        <blockquote>
+          <p>There are situations, where you really need the full programmatic power of JavaScript. That’s where you can use the render function, a closer-to-the-compiler alternative to templates.</p>
+          <footer>
+            — <cite><a href="https://vuejs.org/v2/guide/render-function.html" target="_blank" rel="noopener noreferrer">Vuejs.org</a></cite>
+          </footer>
+        </blockquote>
+      </section>
+
+      <section>
+        <h3>Interesting facts about render</h3>
+        <p class="fragment">🏎 <code>&lt;template&gt;</code> compiles to render functions <a href="https://vuejs.org/v2/guide/render-function.html#Template-Compilation" target="_blank" rel="noopener noreferrer">under the hood</a>.</p>
+        <p class="fragment">⚛️ A way to write Vue <a href="https://vuejs.org/v2/guide/render-function.html#JSX" target="_blank" rel="noopener noreferrer">with JSX</a></p>
+        <p class="fragment">⚙️ Useful for <a href="https://vuejs.org/v2/guide/render-function.html#Functional-Components" target="_blank" rel="noopener noreferrer">functional</a> (stateless) components.</p>
+      </section>
+
+      <section>
+        <h4>Docs have useful example of <a href="https://vuejs.org/v2/guide/render-function.html#Basics" target="_blank" rel="noopener noreferrer">programmatic templating</a></h4>
+        <pre>
+          <code data-trim>
+              <!-- AnchoredHeading.vue -->
+              <template>
+                <h1 v-if="level === 1">
+                  <slot></slot>
+                </h1>
+                <h2 v-else-if="level === 2">
+                  <slot></slot>
+                </h2>
+                <h3 v-else-if="level === 3">
+                  <slot></slot>
+                </h3>
+                <h4 v-else-if="level === 4">
+                  <slot></slot>
+                </h4>
+                <h5 v-else-if="level === 5">
+                  <slot></slot>
+                </h5>
+                <h6 v-else-if="level === 6">
+                  <slot></slot>
+                </h6>
+              </template>
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <pre>
+            <code data-trim>
+              // AnchoredHeading.vue
+              export default {
+                render: function (createElement) {
+                  return createElement(
+                    'h' + this.level,   // tag name
+                    this.$slots.default // array of children
+                  )
+                },
+                props: {
+                  level: {
+                    type: Number,
+                    required: true
+                  }
+                }
+              };
+            </code>
+          </pre>
+      </section>
+
+      <section>
+        <h1>On Outside Click</h1>
+        <p><em>A renderless component</em></p>
+      </section>
+
+      <section>
+        <p>What if you want to componentise <span class="underline">functionality</span> and define the markup uniquely?</p>
+      </section>
+
+      <section>
+        <p>The render function needs to <a href="https://vuejs.org/v2/guide/render-function.html#The-Virtual-DOM" target="_blank" rel="noopener noreferrer">return a VNODE</a>.</p>
+      </section>
+
+      <section>
+        <pre>
+          <code data-trim>
+            {
+              name: 'SomeComponent',
+              render() {
+                return createElement('h1', this.blogTitle);
+              },
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <pre>
+          <code data-trim>
+            {
+              name: 'SomeComponent',
+              render() {
+                return this.$slots.default[0];
+              },
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <pre>
+          <code data-trim>
+            {
+              name: 'SomeComponent',
+              render() {
+                return this.$scopedSlots.default({
+                  childData: this.childData,
+                  childMethod: this.childMethod,
+                });
+              },
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <iframe src="https://codesandbox.io/embed/vvr7vo76z5?fontsize=16&module=%2Fsrc%2FPageLayout.vue" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+      </section>
+
+      <section>
         <h1>Slots</h1>
       </section>
 
@@ -371,136 +501,100 @@
         <p><em>With Scoped Slot Data</em></p>
       </section>
 
-      <!-- !!! Add walkthrough and embed here -->
-
       <section>
-        <h1>Render Function</h1>
-      </section>
-
-      <section>
-        <blockquote>
-          <p>There are situations, where you really need the full programmatic power of JavaScript. That’s where you can use the render function, a closer-to-the-compiler alternative to templates.</p>
-          <footer>
-            — <cite><a href="https://vuejs.org/v2/guide/render-function.html" target="_blank" rel="noopener noreferrer">Vuejs.org</a></cite>
-          </footer>
-        </blockquote>
-      </section>
-
-      <section>
-        <h3>Interesting facts about render</h3>
-        <p class="fragment">🏎 <code>&lt;template&gt;</code> compiles to render functions <a href="https://vuejs.org/v2/guide/render-function.html#Template-Compilation" target="_blank" rel="noopener noreferrer">under the hood</a>.</p>
-        <p class="fragment">⚛️ A way to write Vue <a href="https://vuejs.org/v2/guide/render-function.html#JSX" target="_blank" rel="noopener noreferrer">with JSX</a></p>
-        <p class="fragment">⚙️ Useful for <a href="https://vuejs.org/v2/guide/render-function.html#Functional-Components" target="_blank" rel="noopener noreferrer">functional</a> (stateless) components.</p>
-      </section>
-
-      <section>
-        <h4>Docs have useful example of <a href="https://vuejs.org/v2/guide/render-function.html#Basics" target="_blank" rel="noopener noreferrer">programmatic templating</a></h4>
         <pre>
           <code data-trim>
-              <!-- AnchoredHeading.vue -->
-              <template>
-                <h1 v-if="level === 1">
-                  <slot></slot>
-                </h1>
-                <h2 v-else-if="level === 2">
-                  <slot></slot>
-                </h2>
-                <h3 v-else-if="level === 3">
-                  <slot></slot>
-                </h3>
-                <h4 v-else-if="level === 4">
-                  <slot></slot>
-                </h4>
-                <h5 v-else-if="level === 5">
-                  <slot></slot>
-                </h5>
-                <h6 v-else-if="level === 6">
-                  <slot></slot>
-                </h6>
-              </template>
+            <!-- MyList.vue -->
+            <template>
+              <div>
+                <slot
+                  v-for="item in items"
+                  :item="item">
+                </slot>
+              </div>
+            </template>
+
+            <script>
+              export default {
+                name: 'MyList',
+                props: {
+                  items: {
+                    type: Array,
+                    default: () => [],
+                  },
+                },
+              };
+              </script>
           </code>
         </pre>
       </section>
 
       <section>
         <pre>
-            <code data-trim>
-              // AnchoredHeading.vue
+          <code data-trim>
+            <!-- Parent -->
+            <template>
+              <My-List :items="listItems">
+                <div
+                  slot-scope="slotProps"
+                  class="...">
+                  {{ slotProps.item.text }}
+                </div>
+              </My-List>
+            </template>
+
+            <script>
               export default {
-                render: function (createElement) {
-                  return createElement(
-                    'h' + this.level,   // tag name
-                    this.$slots.default // array of children
-                  )
-                },
-                props: {
-                  level: {
-                    type: Number,
-                    required: true
-                  }
+                name: 'ParentComponent',
+                data() {
+                  return {
+                    listItems: [
+                      { text: 'Ice cream', emoji: '🍦' },
+                      { text: 'Magic', emoji: '🧙🏻‍♂️' },
+                      { text: 'Space', emoji: '🚀' },
+                    ]
+                  };
                 }
               };
-            </code>
-          </pre>
-      </section>
-
-      <section>
-        <h1>On Outside Click</h1>
-        <p><em>A renderless component</em></p>
-      </section>
-
-      <section>
-        <p>What if you want to componentise <span class="underline">functionality</span> and define the markup uniquely?</p>
-      </section>
-
-      <section>
-        <p>The render function needs to <a href="https://vuejs.org/v2/guide/render-function.html#The-Virtual-DOM" target="_blank" rel="noopener noreferrer">return a VNODE</a>.</p>
-      </section>
-
-      <section>
-        <pre>
-          <code data-trim>
-            {
-              name: 'SomeComponent',
-              render() {
-                return createElement('h1', this.blogTitle);
-              },
-            }
+            </script>
           </code>
         </pre>
       </section>
 
       <section>
         <pre>
-          <code data-trim>
-            {
-              name: 'SomeComponent',
-              render() {
-                return this.$slots.default[0];
-              },
-            }
+          <code class="diff" data-trim>
+            <!-- Parent -->
+            <template>
+              <My-List :items="listItems">
+            -   <div slot-scope="slotProps" class="...">
+            +   <div slot-scope="{ item }" class="...">
+            -     {{ slotProps.item.text }}
+            +     {{ item.text }}
+                </div>
+              </My-List>
+            </template>
           </code>
         </pre>
       </section>
 
       <section>
-        <pre>
-          <code data-trim>
-            {
-              name: 'SomeComponent',
-              render() {
-                return this.$scopedSlots.default({
-                  childData: this.childData,
-                  childMethod: this.childMethod,
-                });
-              },
-            }
-          </code>
-        </pre>
+        <iframe src="https://codesandbox.io/embed/10493l1wv3?fontsize=16&module=%2Fsrc%2FPageLayout.vue" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
       </section>
 
       <section>
-        <iframe src="https://codesandbox.io/embed/vvr7vo76z5?fontsize=16&module=%2Fsrc%2FPageLayout.vue" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+        <h1>Popper</h1>
+        <p><em>encapsulating 3rd party JavaScript</em></p>
+      </section>
+
+      <section class="center">
+        <img src="./assets/images/popper-js.png" alt="The homepage of popper.js, Popper.js is just ~6KB minified and gzipped, with zero dependencies.">
+      </section>
+
+      <!-- Add explanation steps here -->
+
+      <section>
+        <iframe src="https://codesandbox.io/embed/38lj9omp71?fontsize=16&module=%2Fsrc%2FPageLayout.vue" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
       </section>
 
     </div>
