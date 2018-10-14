@@ -86,7 +86,7 @@
         <blockquote>
           <p>Vue implements a content distribution API that’s modeled after the current <a href="https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md" target="_blank" rel="noopener noreferrer">Web Components spec draft</a>, using the <slot> element to serve as distribution outlets for content.</p>
           <footer>
-            — <cite><a href="https://vuejs.org/v2/guide/components-slots.html">Vuejs.org</a></cite>
+            — <cite><a href="https://vuejs.org/v2/guide/components-slots.html" target="_blank" rel="noopener noreferrer">Vuejs.org</a></cite>
           </footer>
         </blockquote>
       </section>
@@ -353,7 +353,7 @@
         <blockquote>
           <p>Sometimes you’ll want to provide a component with a reusable slot that can access data from the child component. </p>
           <footer>
-            — <cite><a href="https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots">Vuejs.org</a></cite>
+            — <cite><a href="https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots" target="_blank" rel="noopener noreferrer">Vuejs.org</a></cite>
           </footer>
         </blockquote>
       </section>
@@ -374,9 +374,126 @@
         <blockquote>
           <p>There are situations, where you really need the full programmatic power of JavaScript. That’s where you can use the render function, a closer-to-the-compiler alternative to templates.</p>
           <footer>
-            — <cite><a href="https://vuejs.org/v2/guide/render-function.html">Vuejs.org</a></cite>
+            — <cite><a href="https://vuejs.org/v2/guide/render-function.html" target="_blank" rel="noopener noreferrer">Vuejs.org</a></cite>
           </footer>
         </blockquote>
+      </section>
+
+      <section>
+        <h3>Interesting facts about render</h3>
+        <p class="fragment">🏎 <code>&lt;template&gt;</code> compiles to render functions <a href="https://vuejs.org/v2/guide/render-function.html#Template-Compilation" target="_blank" rel="noopener noreferrer">under the hood</a>.</p>
+        <p class="fragment">⚛️ A way to write Vue <a href="https://vuejs.org/v2/guide/render-function.html#JSX" target="_blank" rel="noopener noreferrer">with JSX</a></p>
+        <p class="fragment">⚙️ Useful for <a href="https://vuejs.org/v2/guide/render-function.html#Functional-Components" target="_blank" rel="noopener noreferrer">functional</a> (stateless) components.</p>
+      </section>
+
+      <section>
+        <h4>Docs have useful example of <a href="https://vuejs.org/v2/guide/render-function.html#Basics" target="_blank" rel="noopener noreferrer">programmatic templating</a></h4>
+        <pre>
+          <code data-trim>
+              <!-- AnchoredHeading.vue -->
+              <template>
+                <h1 v-if="level === 1">
+                  <slot></slot>
+                </h1>
+                <h2 v-else-if="level === 2">
+                  <slot></slot>
+                </h2>
+                <h3 v-else-if="level === 3">
+                  <slot></slot>
+                </h3>
+                <h4 v-else-if="level === 4">
+                  <slot></slot>
+                </h4>
+                <h5 v-else-if="level === 5">
+                  <slot></slot>
+                </h5>
+                <h6 v-else-if="level === 6">
+                  <slot></slot>
+                </h6>
+              </template>
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <pre>
+            <code data-trim>
+              // AnchoredHeading.vue
+              export default {
+                render: function (createElement) {
+                  return createElement(
+                    'h' + this.level,   // tag name
+                    this.$slots.default // array of children
+                  )
+                },
+                props: {
+                  level: {
+                    type: Number,
+                    required: true
+                  }
+                }
+              };
+            </code>
+          </pre>
+      </section>
+
+      <section>
+        <h1>On Outside Click</h1>
+        <p><em>A renderless component</em></p>
+      </section>
+
+      <section>
+        <p>What if you want to componentise <span class="underline">functionality</span> and define the markup uniquely?</p>
+      </section>
+
+      <section>
+        <p>The render function needs to <a href="https://vuejs.org/v2/guide/render-function.html#The-Virtual-DOM" target="_blank" rel="noopener noreferrer">return a VNODE</a>.</p>
+      </section>
+
+      <section>
+        <pre>
+          <code data-trim>
+            {
+              name: 'SomeComponent',
+              render() {
+                return createElement('h1', this.blogTitle);
+              },
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <pre>
+          <code data-trim>
+            {
+              name: 'SomeComponent',
+              render() {
+                return this.$slots.default[0];
+              },
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <pre>
+          <code data-trim>
+            {
+              name: 'SomeComponent',
+              render() {
+                return this.$scopedSlots.default({
+                  childData: this.childData,
+                  childMethod: this.childMethod,
+                });
+              },
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <iframe src="https://codesandbox.io/embed/vvr7vo76z5?fontsize=16&module=%2Fsrc%2FPageLayout.vue" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
       </section>
 
     </div>
