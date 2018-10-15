@@ -60,7 +60,7 @@
       </section>
 
       <section>
-        <h4><a href="./assets/docs/chicago-vuejs-survey-results.pdf" target="_blank" rel="noopener noreferrer">Survey Results</a> of topic understanding:</h4>
+        <h4><a href="./assets/docs/chicago-vuejs-survey-results-10-14.pdf" target="_blank" rel="noopener noreferrer">Survey Results</a> of topic understanding:</h4>
         <p class="fragment">🤯 <em>Slots</em></p>
         <p class="fragment">🤯 <em>Scoped Slots</em></p>
         <p class="fragment">😎 <em>Render Function</em></p>
@@ -278,6 +278,10 @@
             </my-button>
           </code>
         </pre>
+      </section>
+
+      <section>
+        <p>Quick note, <code>my-button</code> <em>(kebab-case)</em> and <code>MyButton</code> <em>(PascalCase)</em> are both acceptable and are only truely different when <a href="https://vuejs.org/v2/guide/components-registration.html#Name-Casing" target="_blank" rel="noopener noreferrer">using non-string templates</a>.</p>
       </section>
 
       <section>
@@ -544,7 +548,7 @@
                   },
                 },
               };
-              </script>
+            </script>
           </code>
         </pre>
       </section>
@@ -582,6 +586,7 @@
       </section>
 
       <section>
+        <h4>ES6 FTW 🙌🏻</h4>
         <pre>
           <code class="diff" data-trim>
             <!-- Parent -->
@@ -604,14 +609,269 @@
 
       <section>
         <h1>Popper</h1>
-        <p><em>encapsulating 3rd party JavaScript</em></p>
+        <p><em>Encapsulating 3rd Party JavaScript</em></p>
       </section>
 
       <section class="center">
         <img src="./assets/images/popper-js.png" alt="The homepage of popper.js, Popper.js is just ~6KB minified and gzipped, with zero dependencies.">
       </section>
 
-      <!-- Add explanation steps here -->
+      <section>
+        <pre>
+          <code data-trim>
+            <script>
+            import Popper from 'popper.js';
+
+            export default {
+              name: 'Popper',
+              props: {
+                config: {
+                  type: Object,
+                  default: () => ({ placement: 'bottom' }),
+                },
+              },
+              data() {
+                return {};
+              },
+              render() {
+                return this.$scopedSlots.default({});
+              },
+            };
+            </script>
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <pre>
+          <code class="diff" data-trim>
+              ...
+              data() {
+            -   return {};
+            +   return {
+            +     isOpen: false,
+            +     triggerEl: null,
+            +     popperEl: null,
+            +   };
+              },
+            + mounted() {
+            +   this.triggerEl = this.$el.querySelector('[data-trigger]');
+            +   this.popperEl = this.$el.querySelector('[data-popper]');
+            + },
+              ...
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <pre>
+          <code data-trim>
+            // ...
+            {
+              methods: {
+                setupPopper() {
+                  if (this.popper === undefined) {
+                    this.popper = new Popper(this.triggerEl, this.popperEl, this.config);
+                  } else {
+                    this.popper.scheduleUpdate();
+                  }
+                },
+              },
+            }
+            // ...
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <pre>
+          <code data-trim>
+            // ...
+            {
+              methods: {
+                // ...
+                open() {
+                  if (this.isOpen) {
+                    return;
+                  }
+
+                  this.isOpen = true;
+                  this.$nextTick(() => {
+                    this.setupPopper();
+                  });
+                },
+                close() {
+                  if (!this.isOpen) {
+                    return;
+                  }
+
+                  this.isOpen = false;
+                },
+              },
+            }
+            // ...
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h4>Don't forget to 🚮</h4>
+        <pre>
+          <code data-trim>
+              // ...
+              {
+                data() {
+                  // ...
+                },
+                beforeDestroy() {
+                  if (!this.popper) {
+                    return;
+                  }
+
+                  this.popper.destroy();
+                },
+                mounted() {
+                  // ...
+                },
+                // ...
+              }
+              // ...
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <pre>
+          <code class="diff" data-trim>
+            // ...
+            {
+              // ...
+              render() {
+            -   return this.$scopedSlots.default({});
+            +   return this.$scopedSlots.default({
+            +     isOpen: this.isOpen,
+            +     open: this.open,
+            +     close: this.close,
+            +   });
+              },
+            }
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <pre>
+          <code data-trim>
+            <!-- Parent Component -->
+            <template>
+              <my-popper>
+                <div slot-scope="{ isOpen, open, close }">
+                  <button data-trigger>Action</button>
+                  <div
+                    v-show="isOpen"
+                    data-popper>
+                    Content of the popper goes here
+                  </div>
+                </div>
+              </my-popper>
+            </template>
+
+            <script>
+            import MyPopper from '@/components';
+
+            export default {
+              name: 'ComponentUsingPopper',
+              components: {
+                MyPopper,
+              },
+            }
+            </script>
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h1>Component Composition</h1>
+        <p><em>Components In Components In Components</em></p>
+        <p><em>(Cue Inception Horns)</em></p>
+      </section>
+
+      <section>
+        <h4>Tooltip</h4>
+        <small><em>Hover activated, icon as trigger, dark popper, standard transition</em></small>
+        <pre>
+          <code data-trim>
+            <!-- (Summary of the code) -->
+            <template>
+              <my-popper>
+                <div
+                  slot-scope="{ isOpen, open, close }"
+                  @mouseover="open"
+                  @mouseleave="close">
+                  <!-- SVG trigger -->
+                  <my-transition>
+                    <div v-show="isOpen">
+                      <!-- Popper content -->
+                    </div>
+                  </my-transition>
+                </div>
+              </my-popper>
+            </template>
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h4>Input Tooltip</h4>
+        <small><em>Regex activated, input + validation as trigger, red popper, standard transition</em></small>
+        <pre>
+          <code data-trim>
+            <!-- (Summary of the code) -->
+            <template>
+              <my-popper>
+                <div slot-scope="{ isOpen, open, close }">
+                  <MyInput @input="validate($event, open, close)" />
+                  <my-transition>
+                    <div v-show="isOpen">
+                      <!-- Popper content -->
+                    </div>
+                  </my-transition>
+                </div>
+              </my-popper>
+            </template>
+          </code>
+        </pre>
+      </section>
+
+      <section>
+        <h4>Dropdown</h4>
+        <small><em>Click activated, button as trigger, can close on outside click, menu appearance, standard transition</em></small>
+        <pre>
+          <code data-trim>
+            <!-- (Summary of the code) -->
+            <template>
+              <my-popper>
+                <on-outside-click
+                  slot-scope="{ isOpen, open, close }"
+                  :do="close">
+                  <div class="flex">
+                    <my-button
+                      @click.native="open"
+                      @keydown.esc="close">
+                      <!-- Button content -->
+                    </my-button>
+                    <my-transition>
+                      <div v-show="isOpen">
+                        <!-- Menu content -->
+                      </div>
+                    </my-transition>
+                  </div>
+                </on-outside-click>
+              </my-popper>
+            </template>
+          </code>
+        </pre>
+      </section>
 
       <section>
         <iframe src="https://codesandbox.io/embed/38lj9omp71?fontsize=16&module=%2Fsrc%2FPageLayout.vue" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
@@ -626,6 +886,8 @@
           <li><a href="https://adamwathan.me/advanced-vue-component-design/">Advanced Vue Component Design Course</a></li>
         </ul>
       </section>
+
+      <section data-background="https://media.giphy.com/media/3oz8xIsloV7zOmt81G/giphy.gif"></section>
 
     </div>
   </div>
